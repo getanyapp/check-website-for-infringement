@@ -68,11 +68,13 @@
 
 ## 最终运行效果示例
     1. 打开任意页面（此处以 `www.baidu.com` 为例），脚本界面如下：  
-       ![步骤11-1：脚本面板](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/9.jpg)  
+       ![步骤11-1：脚本面板](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/9.jpg)
+       
       <br>
        
     2. 点击“开始检测”按钮，首次会弹出域名授权请求，选择“Always allow domain”：  
-       ![步骤11-2：授权域名](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/9.0.jpg)  
+       ![步骤11-2：授权域名](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/9.0.jpg)
+       
       <br>
        
     3. 脚本自动运行，完成后会自动下载一份 Excel 报告：  

@@ -18,7 +18,7 @@
 
    <br>
 
-5. **打开 Tampermonkey 管理页面**  
+5. **打开浏览器扩展管理页面**  
    ![步骤3：管理扩展](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/2.jpg)
 
    <br>

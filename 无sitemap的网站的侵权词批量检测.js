@@ -25,7 +25,6 @@
         'seekingarrangement.com',
         'seekingarrangement',
         'relationship on your terms and mutually beneficial relationships',
-        'relationships',
         'seeking.com',
         'seeking',
         'seeking millionaire',

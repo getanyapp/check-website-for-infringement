@@ -75,7 +75,7 @@
 打开任意页面（此处以 `www.baidu.com` 为例），脚本界面如下：  
 ![脚本面板](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/9.jpg)
 
-点击“开始检测”按钮，会弹出域名授权请求，选择“always allow domain”：  
+点击“开始检测”按钮，会弹出域名授权请求，选择“always allow all domains”：  
 ![授权域名](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/9.0.jpg)
 
 脚本自动运行，完成后会自动下载一份 Excel 报告：  

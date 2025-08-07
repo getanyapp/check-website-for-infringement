@@ -45,37 +45,37 @@
 
    <br>
 
-7. **新建一个空脚本**  
+6. **新建一个空脚本**  
    在 Tampermonkey 中点击“添加脚本”：  
    ![步骤6：新增脚本](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/4.jpg)
 
    <br>
 
-8. **清空默认内容**  
+7. **清空默认内容**  
    全选并删除编辑器内的默认模板内容：  
    ![步骤7：删除默认内容](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/5.jpg)
 
    <br>
 
-9. **拖入本地脚本文件并安装**  
+8. **拖入本地脚本文件并安装**  
    将第 5 步下载的 `.js` 文件拖拽到编辑区域，会弹出安装提示，点击 **Install**：  
    ![步骤8：安装脚本](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/6.jpg)
 
    <br>
 
-10. **进入脚本编辑界面**  
+9. **进入脚本编辑界面**  
    点击 Tampermonkey 图标，再点击刚才安装的脚本进行编辑：  
    ![步骤9：编辑脚本](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/7.jpg)
 
    <br>
 
-11. **按照脚本内的 `@description` 注释步骤依次配置**  
+10. **按照脚本内的 `@description` 注释步骤依次配置**  
     脚本内含详细的配置说明，按注释一步步操作即可：  
     ![步骤10：查看说明](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/8.jpg)
 
     <br>
 
-12. **改好脚本代码之后，打开任意页面，或者刷新一下任意页面，即可启动脚本**
+11. **改好脚本代码之后，打开任意页面，或者刷新一下任意页面，即可启动脚本**
 
     <br>
 

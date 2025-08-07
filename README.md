@@ -7,8 +7,8 @@
 ## 使用方法
 
 1. **安装 Tampermonkey 插件**  
-   在浏览器中打开以下链接，下载并安装 Tampermonkey（篡改猴）插件：  
-   https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo  
+   在浏览器中打开以下链接，在新页面下载并安装 Tampermonkey（篡改猴）插件：  
+   <a href="https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo" target="_blank" rel="noopener noreferrer">下载并安装 Tampermonkey（篡改猴）插件</a>  
    ![步骤1：安装Tampermonkey](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/0.jpg)
 
 2. **在扩展栏中将 Tampermonkey 锁定**  

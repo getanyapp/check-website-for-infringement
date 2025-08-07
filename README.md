@@ -4,7 +4,9 @@
 
 将会自动跳过不包含`sitemap.xml` 或 `post-sitemap.xml` 或 `page-sitemap.xml` 或 `category-sitemap.xml` 或 `sitemap_index.xml`文件的网站的检测。  
 
-❗ 如果你的网站没有sitemap，那么将会跳过对该网站的检测，建议先去添加sitemap文件，再来检测 ❗  
+❗ 如果你的网站没有sitemap，那么将会跳过对该网站的检测 ❗  
+
+你可以先去把所有网站检测一遍，然后从获得的表格中，可以知道哪些网站没有sitemap，然后再去使用`无sitemap的网站的侵权词批量检测.js`这个脚本，去把这些网站单独检测一遍。详见`5. **下载脚本文件到本地**`
 
 在检测过程中，会自动跳过 `<a href="">` 链接标签内部的文本。
 
@@ -36,41 +38,44 @@
 5. **下载脚本文件到本地**  
    点击下载“自动批量检测网站是否包含侵权词”脚本：  
    https://github.com/getanyapp/check-website-for-infringement/blob/main/%E8%87%AA%E5%8A%A8%E6%89%B9%E9%87%8F%E6%A3%80%E6%B5%8B%E7%BD%91%E7%AB%99%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E4%BE%B5%E6%9D%83%E8%AF%8D.js  
-   ![步骤5：下载脚本](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/10.jpg)
+   ![步骤5：下载脚本](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/10.jpg)  
+
+   如果你的网站没有sitemap，则下载“无sitemap的网站的侵权词批量检测”脚本：
+      https://github.com/getanyapp/check-website-for-infringement/blob/main/%E6%97%A0sitemap%E7%9A%84%E7%BD%91%E7%AB%99%E7%9A%84%E4%BE%B5%E6%9D%83%E8%AF%8D%E6%89%B9%E9%87%8F%E6%A3%80%E6%B5%8B.js
 
    <br>
 
-6. **新建一个空脚本**  
+7. **新建一个空脚本**  
    在 Tampermonkey 中点击“添加脚本”：  
    ![步骤6：新增脚本](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/4.jpg)
 
    <br>
 
-7. **清空默认内容**  
+8. **清空默认内容**  
    全选并删除编辑器内的默认模板内容：  
    ![步骤7：删除默认内容](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/5.jpg)
 
    <br>
 
-8. **拖入本地脚本文件并安装**  
+9. **拖入本地脚本文件并安装**  
    将第 5 步下载的 `.js` 文件拖拽到编辑区域，会弹出安装提示，点击 **Install**：  
    ![步骤8：安装脚本](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/6.jpg)
 
    <br>
 
-9. **进入脚本编辑界面**  
+10. **进入脚本编辑界面**  
    点击 Tampermonkey 图标，再点击刚才安装的脚本进行编辑：  
    ![步骤9：编辑脚本](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/7.jpg)
 
    <br>
 
-10. **按照脚本内的 `@description` 注释步骤依次配置**  
+11. **按照脚本内的 `@description` 注释步骤依次配置**  
     脚本内含详细的配置说明，按注释一步步操作即可：  
     ![步骤10：查看说明](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/8.jpg)
 
     <br>
 
-11. **改好脚本代码之后，打开任意页面，或者刷新一下任意页面，即可启动脚本**
+12. **改好脚本代码之后，打开任意页面，或者刷新一下任意页面，即可启动脚本**
 
     <br>
 

@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         自动批量检测网站是否包含侵权词（打开任何页面，点击页面右下角的“开始检测”按钮即可运行）
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.4
 // @description  ✨ 以下必读 ✨
 // @description  步骤一：修改第27行起的侵权词列表的定义。我已经定义好了，自行看有没有需要补充的
-// @description  步骤二：根据自己的需求，修改第37行起的反向侵权词列表的定义，没有则忽略。
-// @description  步骤三：从46行起填入你的所有网站的url。
+// @description  步骤二：根据自己的需求，修改第44行起的反向侵权词列表的定义，没有则忽略。
+// @description  步骤三：从53行起填入你的所有网站的url。
 // @description  步骤四：任意打开一个网站/页面，点击页面右下角的“开始检测”按钮即可运行脚本，比如打开www.baidu.com。
 // @description  原理：自动获取网站的sitemap文件，然后依次检测每一个页面的HTML代码是否包含侵权词。自动跳过代码中的href=""（链接）内的文本。
-// @description  网站必须有/sitemap.xml文件才能检测，脚本会自动跳过没有sitemap.xml文件的网站。
+// @description  网站必须有sitemap.xml 或 post-sitemap.xml 或 page-sitemap.xml 或 category-sitemap.xml 或 sitemap_index.xml文件才能检测，脚本会自动跳过一个sitemap文件都没有的网站。
 // @description  ❗ 检测过程中，不要关闭浏览器，也不要停止检测，检测完毕，浏览器将会自动下载一个名为“侵权页面合集.xlsx”的表格 ❗
 // @author       Musk
 // @match        *://*/*
@@ -24,17 +24,24 @@
 
     console.log('[InfringementDetector] 脚本载入成功');
 
-    // 🚩 在这里定义 侵权词 列表, 一排一个词，用英文的逗号分隔
+    // 🚩 在这里定义 侵权词 列表, 一排一个词，用英文的逗号分隔 🚩
     const infringementWords = [
-        'seeking',
-        'mutually beneficial relationship',
+        'seeking arrangement',
         'mutually beneficial relationships',
-        'relationship on your terms and mutually beneficial',
+        'seekingarrangement.com',
+        'seekingarrangement',
+        'relationship on your terms and mutually beneficial relationships',
         'relationships',
+        'seeking.com',
+        'seeking',
+        'seeking millionaire',
+        'sa',
+        'relationship on your terms',
+        'mutually beneficial relationship',
         'mutually beneficial arrangements'
     ];
 
-    // 🚩 在这里定义 反向侵权词 列表, 一排一个词，用英文的逗号分隔。如果没有，则可以直接删除或随便设置一个无关的词
+    // 🚩 在这里定义 反向侵权词 列表, 一排一个词，用英文的逗号分隔。如果没有，则可以直接删除或随便设置一个无关的词 🚩
     // 反向侵权词的意义是：当侵权词列表包含这里的词的一部分，则不认定为侵权，相当于白名单
     // 通俗易懂的举例如下：
     // 侵权词列表定义：arrangement，反向侵权词列表定义arrangements。则当出现arrangements的时候，不侵权；当出现arrangement的时候，侵权
@@ -43,7 +50,7 @@
         'arrangements'
     ];
 
-    // 🚩 在这里定义 你的网站url 合集，一排一个网站，用英文的逗号分隔
+    // 🚩 在这里定义 你的网站url 合集，一排一个网站，用英文的逗号分隔 🚩
     const siteList = [
         'https://example.com',
         'https://www.example.com'
@@ -131,7 +138,37 @@
             return;
         }
         const site = siteList[currentSiteIndex];
-        const sitemapUrl = site.replace(/\/+$/,'') + '/sitemap.xml';
+
+        const sitemapFiles = [
+            '/sitemap.xml',
+            '/sitemap_index.xml',
+            '/category-sitemap.xml',
+            '/page-sitemap.xml',
+            '/post-sitemap.xml'
+        ];
+
+        tryNextSitemap(site, sitemapFiles, 0, []);
+    }
+
+    function tryNextSitemap(site, sitemapFiles, fileIndex, allPages) {
+        if (!running) return;
+
+        if (fileIndex >= sitemapFiles.length) {
+            if (allPages.length > 0) {
+                currentPages = [...new Set(allPages)];
+                currentPageIndex = 0;
+                ui.update();
+                processNextPage();
+            } else {
+                console.warn('[InfringementDetector] 该网站没有任何可用的sitemap文件');
+                results.push({ page: site, words: '', sitemap: '否' });
+                currentSiteIndex++;
+                processNextSite();
+            }
+            return;
+        }
+
+        const sitemapUrl = site.replace(/\/+$/,'') + sitemapFiles[fileIndex];
         console.log('[InfringementDetector] 请求 sitemap：', sitemapUrl);
 
         GM_xmlhttpRequest({
@@ -140,25 +177,41 @@
             onload: resp => {
                 console.log('[InfringementDetector] sitemap 返回 %d', resp.status);
                 if (!running) return;
-                if (resp.status === 200 && resp.responseText.includes('<urlset')) {
-                    const parser = new DOMParser();
-                    const xml = parser.parseFromString(resp.responseText, 'application/xml');
-                    currentPages = Array.from(xml.getElementsByTagName('loc')).map(el => el.textContent);
-                    currentPageIndex = 0;
-                    ui.update();
-                    processNextPage();
-                } else {
-                    console.warn('[InfringementDetector] 未发现 sitemap 或响应非 200');
-                    results.push({ page: site, words: '', sitemap: '否' });
-                    currentSiteIndex++;
-                    processNextSite();
+
+                if (resp.status === 200) {
+                    let pages = [];
+
+                    if (resp.responseText.includes('<urlset')) {
+                        const parser = new DOMParser();
+                        const xml = parser.parseFromString(resp.responseText, 'application/xml');
+                        pages = Array.from(xml.getElementsByTagName('loc')).map(el => el.textContent);
+                        console.log('[InfringementDetector] 从XML sitemap提取到', pages.length, '个页面');
+                    }
+                    else if (resp.responseText.includes('id="sitemap"')) {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(resp.responseText, 'text/html');
+                        const sitemapTable = doc.getElementById('sitemap');
+
+                        if (sitemapTable) {
+                            const rows = sitemapTable.querySelectorAll('tbody tr');
+                            pages = Array.from(rows).map(row => {
+                                const link = row.querySelector('td a');
+                                return link ? link.href : null;
+                            }).filter(url => url);
+                            console.log('[InfringementDetector] 从HTML表格sitemap提取到', pages.length, '个页面');
+                        }
+                    }
+
+                    if (pages.length > 0) {
+                        allPages.push(...pages);
+                    }
                 }
+
+                tryNextSitemap(site, sitemapFiles, fileIndex + 1, allPages);
             },
             onerror: err => {
                 console.error('[InfringementDetector] sitemap 请求失败：', err);
-                results.push({ page: site, words: '', sitemap: '否' });
-                currentSiteIndex++;
-                processNextSite();
+                tryNextSitemap(site, sitemapFiles, fileIndex + 1, allPages);
             }
         });
     }
@@ -181,14 +234,22 @@
                 console.log('[InfringementDetector] 页面返回 %d', resp.status);
                 if (!running) return;
                 let html = resp.responseText.toLowerCase();
-                html = html.replace(/href=\"(.*?)\"/gi, '');
+                html = html.replace(/href="(.*?)"/gi, '');
 
-                const foundRaw = infringementWords.filter(w => html.includes(w.toLowerCase()));
-                const found = foundRaw.filter(w =>
-                    !reverseInfringementWords.some(r =>
-                        r.toLowerCase().includes(w.toLowerCase()) && html.includes(r.toLowerCase())
-                    )
-                );
+                const foundRaw = infringementWords.filter(w => {
+                    const word = w.toLowerCase();
+                    const regex = new RegExp('\\b' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+                    return regex.test(html);
+                });
+
+                const found = foundRaw.filter(w => {
+                    const word = w.toLowerCase();
+                    return !reverseInfringementWords.some(r => {
+                        const reverseWord = r.toLowerCase();
+                        const reverseRegex = new RegExp('\\b' + reverseWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+                        return word.includes(reverseWord) && reverseRegex.test(html);
+                    });
+                });
 
                 if (found.length) {
                     console.log('[InfringementDetector] 找到侵权词：', found);
@@ -218,7 +279,6 @@
         const wsData = [['侵权页面url', '侵权词', '是否有sitemap.xml'], ...results.map(r => [r.page, r.words, r.sitemap || ''])];
         const ws = XLSX.utils.aoa_to_sheet(wsData);
 
-        // 列宽自适应
         const colWidths = wsData[0].map((_, colIndex) => {
             const maxLen = wsData.reduce((max, row) => {
                 const cell = row[colIndex] == null ? '' : row[colIndex].toString();
@@ -235,4 +295,3 @@
 
     initUI();
 })();
-

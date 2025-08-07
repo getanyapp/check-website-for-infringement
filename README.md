@@ -1,8 +1,8 @@
 ## 原理
 
-本脚本会自动获取目标网站的 `sitemap.xml` 文件，然后依次检测其中每一个页面的 HTML 代码是否包含预设的侵权词。  
+本脚本会自动获取目标网站的 `sitemap` 文件，然后依次检测其中每一个页面的 HTML 代码是否包含预设的侵权词。  
 
-将会自动跳过不包含sitemap.xml 或 post-sitemap.xml 或 page-sitemap.xml 或 category-sitemap.xml 或 sitemap_index.xml文件的网站的检测。  
+将会自动跳过不包含`sitemap.xml` 或 `post-sitemap.xml` 或 `page-sitemap.xml` 或 `category-sitemap.xml` 或 `sitemap_index.xml`文件的网站的检测。  
 
 ❗ 如果你的网站没有sitemap，那么将会跳过对该网站的检测，建议先去添加sitemap文件，再来检测 ❗  
 

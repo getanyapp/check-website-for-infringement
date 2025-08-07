@@ -72,6 +72,8 @@
 
 11. **改好脚本代码之后，打开任意页面，或者刷新一下任意页面，即可启动脚本**
 
+    <br>
+
 ## 最终运行效果示例
 
 打开任意页面（此处以 `www.baidu.com` 为例），脚本界面如下：  
@@ -82,6 +84,8 @@
 
 脚本自动运行，完成后会自动下载一份 Excel 报告：  
 ![下载报告](https://raw.githubusercontent.com/getanyapp/check-website-for-infringement/main/image/9.1.jpg)
+
+<br>
 
 ## FAQ
 1. **安装脚本后没有显示"开始检测"按钮**  

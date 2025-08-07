@@ -71,7 +71,7 @@
             const totalPages = currentPages.length;
             const curPageNum = totalPages ? currentPageIndex + 1 : 0;
             const discoveredCount = discoveredUrls.size;
-            this.top.innerText = `共 ${siteList.length} 个网站；第 ${currentSiteIndex + 1} 个；` +
+            this.top.innerText = `共 ${siteList.length} 个网站；当前第 ${currentSiteIndex + 1} 个；` +
                                  `已发现 ${discoveredCount} 页，检测第 ${curPageNum} 页`;
         }
     };

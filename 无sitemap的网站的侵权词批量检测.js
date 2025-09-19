@@ -5,7 +5,7 @@
 // @description  脚本会自动爬取网站的所有内部页面链接，忽略外链，适用于没有sitemap的网站。
 // @description  ❗ 检测过程中，不要关闭浏览器，也不要停止检测，检测完毕，浏览器将会自动下载一个名为"侵权页面合集-无sitemap.xlsx"的表格 ❗
 // @author       Musk
-// @match        *://*/*
+// @match        https://www.sugardaddymeet.com
 // @grant        GM_xmlhttpRequest
 // @grant        GM_addStyle
 // @connect      *

@@ -6,7 +6,7 @@
 // @description  步骤一：修改第27行起的侵权词列表的定义。我已经定义好了，自行看有没有需要补充的
 // @description  步骤二：根据自己的需求，修改第44行起的反向侵权词列表的定义，没有则忽略。
 // @description  步骤三：从53行起填入你的所有网站的url。
-// @description  步骤四：任意打开一个网站/页面，点击页面右下角的“开始检测”按钮即可运行脚本，比如打开www.baidu.com。
+// @description  步骤四：打开https://www.sugardaddymeet.com，点击页面右下角的“开始检测”按钮即可运行脚本。
 // @description  原理：自动获取网站的sitemap文件，然后并行检测每一个页面的HTML代码是否包含侵权词。自动跳过代码中的href=""（链接）内的文本。
 // @description  v2.2修复：添加缓存控制机制，确保每次检测都获取最新的页面内容，避免浏览器缓存影响检测结果
 // @description  v2.1修复：修复HTTP fallback逻辑，确保HTTPS sitemap无法访问时正确尝试HTTP版本并处理页面链接
@@ -464,3 +464,4 @@
 
     initUI();
 })();
+

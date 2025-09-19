@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name         自动批量检测网站是否包含侵权词 - 并发批量检测（打开任何页面，点击页面右下角的“开始检测”按钮即可运行）
-// @namespace    http://tampermonkey.net/
+// @name         自动批量检测网站是否包含侵权词 - 并发批量检测（打开SDM首页，点击页面右下角的“开始检测”按钮即可运行）
+// @namespace    http://tampermonkey.net/S
 // @version      2.2
 // @description  ✨ 以下必读 ✨
 // @description  步骤一：修改第27行起的侵权词列表的定义。我已经定义好了，自行看有没有需要补充的
@@ -464,4 +464,5 @@
 
     initUI();
 })();
+
 
